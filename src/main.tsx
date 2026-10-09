@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { cents, dateKey, initial, parseBackup, period, validDate, type Data, type Expense } from './core';
 import { read, write } from './db';
-import '@fontsource-variable/jetbrains-mono/wght.css';
+
 import '@fontsource/silkscreen/latin-400.css';
 import '@fontsource/silkscreen/latin-700.css';
 import './style.css';
@@ -46,6 +46,7 @@ function App() {
  <dialog ref={actionDialog} className="movement-picker" aria-labelledby="movement-title"><div className="section-title"><h2 id="movement-title">Movimiento</h2><button aria-label="Cerrar menú" onClick={()=>actionDialog.current?.close()}><NavIcon name="close"/></button></div><div className="account-switch" aria-label="Cuenta del movimiento"><button aria-pressed={account==='vault'} className={account==='vault'?'selected':''} onClick={()=>setAccount('vault')}><NavIcon name="cajita"/> Mi Cajita</button><button aria-pressed={account==='cash'} className={account==='cash'?'selected':''} onClick={()=>setAccount('cash')}><NavIcon name="cash"/> Billetera</button></div><div className="movement-options"><button onClick={()=>{actionDialog.current?.close();setEditor('new');}}><b className="movement-icon outgoing"><NavIcon name="outgoing"/></b><span>Gasto</span></button><button disabled={!data[account]} onClick={()=>{actionDialog.current?.close();setDepositOpen(true);}}><b className="movement-icon incoming"><NavIcon name="incoming"/></b><span>Depósito</span></button></div>{!data[account]&&<p className="hint">Configura primero el saldo de {account==='cash'?'tu billetera':'Mi Cajita'}.</p>}</dialog>{depositOpen&&<DepositDialog data={data} account={account} busy={busy} save={save} onClose={()=>setDepositOpen(false)}/>}  <dialog ref={dialog} onCancel={()=>{setEditor(null);setError('');}}><form key={editor==='new'?'new':edit?.id} onSubmit={submitExpense}><div className="section-title"><h2>{edit?'Editar gasto':'Nuevo gasto'}</h2><button type="button" aria-label="Cerrar" onClick={()=>{setEditor(null);setError('');}}><NavIcon name="close"/></button></div>{error && <p role="alert" className="alert">{error}</p>}<label>Importe · MXN<input autoFocus name="amount" type="number" inputMode="decimal" min="0.01" step="0.01" placeholder="0.00" required defaultValue={edit?edit.amount/100:''}/></label><label>Pagar desde<select name="source" defaultValue={edit?.source||account}><option value="vault">Cajita</option><option value="cash">Efectivo</option></select></label><label>Categoría<select name="category" defaultValue={edit?.category}>{data.settings.categories.map(c=><option key={c}>{c}</option>)}</select></label><label>Fecha<input type="date" name="date" required defaultValue={edit?.date||dateKey()}/></label><label>Nota opcional<input name="note" maxLength={200} placeholder="¿En qué lo gastaste?" defaultValue={edit?.note}/></label><button className="primary wide" disabled={busy}>{busy?'Guardando…':'Guardar gasto'}</button>{edit && <button className="danger wide" disabled={busy} type="button" onClick={()=>remove(edit)}>Eliminar gasto</button>}</form></dialog></div>;
 }
 createRoot(document.getElementById('root')!).render(<React.StrictMode><App/></React.StrictMode>);
+
 
 
 
