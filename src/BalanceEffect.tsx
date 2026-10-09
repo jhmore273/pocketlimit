@@ -25,7 +25,7 @@ export default function BalanceEffect({balance}:{balance:number}){
  const incoming=effect.delta>0;
  return <span ref={anchor} key={effect.id} className={`pixel-balance-effect ${incoming?'pixel-gain':'pixel-spend'}`} aria-hidden="true">
   <span className="pixel-balance-label">{incoming&&<b>1UP</b>}<span>{incoming?'+':'−'}{money(Math.abs(effect.delta))}</span></span>
-  {!incoming&&<span className="pixel-burst">{Array.from({length:8},(_,i)=><i key={i}/>)}</span>}
+  {!incoming&&<span className="heart-burst">{Array.from({length:6},(_,i)=><i key={i}>♥</i>)}</span>}
  </span>;
 }
 
