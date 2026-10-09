@@ -2,6 +2,7 @@ export default function NavIcon({name}:{name:string}) {
  const paths:Record<string,React.ReactNode>={
   close:<path d="m6 6 12 12M18 6 6 18"/>,
   left:<path d="m15 5-7 7 7 7"/>,right:<path d="m9 5 7 7-7 7"/>,
+  calendar:<><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3M8 17h7"/></>,
   download:<><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></>,upload:<><path d="M12 16V4m-5 5 5-5 5 5M4 16v5h16v-5"/></>,
   lock:<><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></>,
   dollar:<><path d="M12 2v20M17 5H9a4 4 0 0 0 0 8h6a3 3 0 0 1 0 6H6"/></>,
