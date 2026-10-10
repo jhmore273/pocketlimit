@@ -10,6 +10,8 @@ import VaultPanel from './VaultPanel';
 import CashPanel from './CashPanel';
 import NavIcon from './NavIcon';
 import DepositDialog from './DepositDialog';
+import { applyNextPalette } from './palettes';
+applyNextPalette();
 const categoryIcon=(c:string)=>({Comida:'food',Transporte:'transport',Compras:'shopping',Servicios:'ajustes',Salud:'health',Ocio:'leisure'}[c]||'other');
 const money = (n: number) => new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(n/100);
 const human = (s: string) => new Date(s+'T12:00:00').toLocaleDateString('es-MX',{day:'numeric',month:'short'});
