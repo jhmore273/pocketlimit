@@ -13,10 +13,8 @@ export default function BalanceEffect({balance}:{balance:number}){
   if(!delta)return;
   const id=++sequence.current;
   setFlash({id,incoming:delta>0});
-  const flashTimer=setTimeout(()=>setFlash(current=>current?.id===id?null:current),2100);
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){setEffect(null);return;}
   setEffect({id,delta});
-  return()=>clearTimeout(flashTimer);
  },[balance]);
  useEffect(()=>{
   if(!effect)return;
@@ -26,11 +24,27 @@ export default function BalanceEffect({balance}:{balance:number}){
   const timer=setTimeout(()=>setEffect(null),2200);
   return()=>clearTimeout(timer);
  },[effect]);
+ useEffect(()=>{
+  if(!flash)return;
+  const panel=anchor.current?.closest<HTMLElement>('.balance-current');
+  const particles=panel?.querySelector<HTMLElement>('.potion-particles');
+  if(particles){particles.remove();void panel?.offsetWidth;panel?.append(particles)}
+  panel?.classList.remove('balance-flash-gain','balance-flash-spend','balance-shake');
+  void panel?.offsetWidth;
+  panel?.classList.add(flash.incoming?'balance-flash-gain':'balance-flash-spend');
+  if(!flash.incoming)panel?.classList.add('balance-shake');
+  const timer=setTimeout(()=>{
+   panel?.classList.remove('balance-flash-gain','balance-flash-spend','balance-shake');
+   setFlash(current=>current?.id===flash.id?null:current);
+  },900);
+  return()=>clearTimeout(timer);
+ },[flash]);
  if(!effect&&!flash)return null;
  if(!effect)return <span ref={anchor} className={`pixel-balance-effect balance-flash-marker ${flash?.incoming?'balance-flash-gain':'balance-flash-spend'}`} aria-hidden="true"/>;
  const incoming=effect.delta>0;
  return <span ref={anchor} key={effect.id} className={`pixel-balance-effect ${incoming?'pixel-gain':'pixel-spend'} ${flash?.incoming?'balance-flash-gain':'balance-flash-spend'}`} aria-hidden="true">
   <span className="pixel-balance-label"><span>{incoming?'+':'−'}{money(Math.abs(effect.delta))}</span></span>
+  {incoming&&<span className="potion-particles">{Array.from({length:12},(_,i)=><i key={i}/>)}</span>}
   {!incoming&&<span className="pixel-burst">{Array.from({length:8},(_,i)=><i key={i}/>)}</span>}
  </span>;
 }

@@ -1,5 +1,5 @@
 import { validateVault, type Vault } from './vault';
-export type Expense = { id: string; amount: number; date: string; category: string; note: string; source?: 'cash' | 'vault' };
+export type Expense = { id: string; amount: number; date: string; category: string; note: string; source?: 'cash' | 'vault' | 'black' };
 export type Settings = { budget: number; cadence: 'week' | 'month'; categories: string[] };
 export type Data = { version: 1; settings: Settings; expenses: Expense[]; vault?: Vault; cash?: Vault };
 export const initial: Data = { version: 1, settings: { budget: 300000, cadence: 'month', categories: ['Comida', 'Transporte', 'Compras', 'Servicios', 'Salud', 'Ocio', 'Otros'] }, expenses: [] };
@@ -19,7 +19,7 @@ export function parseBackup(raw: string): Data {
   const s = d?.settings;
   if (d?.version !== 1 || !s || !Number.isSafeInteger(s.budget) || s.budget <= 0 || s.budget > 100000000000 || !['week','month'].includes(s.cadence) || !Array.isArray(s.categories) || !s.categories.length || s.categories.length > 50 || s.categories.some((c: unknown)=> typeof c !== 'string' || !c.trim() || c.length > 40) || new Set(s.categories).size !== s.categories.length || !Array.isArray(d.expenses) || d.expenses.length > 100000) throw new Error('Este archivo no es un respaldo válido de PocketLimit.');
   const ids = new Set();
-  for (const e of d.expenses) { if (!e || typeof e.id !== 'string' || !e.id || ids.has(e.id) || !Number.isSafeInteger(e.amount) || e.amount <= 0 || e.amount > 100000000000 || !validDate(e.date) || !s.categories.includes(e.category) || (e.source!==undefined && !['cash','vault'].includes(e.source)) || typeof e.note !== 'string' || e.note.length > 200) throw new Error('El respaldo contiene gastos inválidos.'); ids.add(e.id); }
+  for (const e of d.expenses) { if (!e || typeof e.id !== 'string' || !e.id || ids.has(e.id) || !Number.isSafeInteger(e.amount) || e.amount <= 0 || e.amount > 100000000000 || !validDate(e.date) || !s.categories.includes(e.category) || (e.source!==undefined && !['cash','vault','black'].includes(e.source)) || typeof e.note !== 'string' || e.note.length > 200) throw new Error('El respaldo contiene gastos inválidos.'); ids.add(e.id); }
   const cash = d.cash === undefined ? undefined : validateVault(d.cash);
   if(cash && (cash.rates.some(r=>r.annual!==0)||cash.movements.some(m=>m.type==='withdrawal')))throw new Error('Efectivo inválido.');
   const vault = d.vault === undefined ? undefined : validateVault(d.vault);
