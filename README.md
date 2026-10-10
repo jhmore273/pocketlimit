@@ -46,7 +46,7 @@ Abre la dirección HTTPS en Safari. Toca Compartir → Añadir a pantalla de ini
 ## Cómo funciona
 
 - Cajita muestra el único saldo estimado, depósitos, retiros y rendimiento. Configura tu saldo inicial y tasa en esa pantalla.
-- Gastos y Resumen permiten agrupar el historial por semanas o meses, sin límites ni presupuestos. Registrar un gasto usa por defecto la fecha de hoy, aunque estés viendo otro periodo.
+- Gastos y Resumen permiten agrupar el historial por semanas o meses, sin límites ni presupuestos. Los gastos y depósitos nuevos se registran automáticamente con la fecha de hoy. Al editar un registro anterior se conserva su fecha.
 - Toca un movimiento para editar o eliminar. La eliminación solicita confirmación.
 - Resumen muestra categorías y totales de seis periodos. Añade categorías desde Ajustes; las categorías usadas no se pueden eliminar.
 - Exportar JSON descarga un respaldo completo. En iPhone, guárdalo en Archivos. Restaurar valida el contenido y pide confirmación antes de reemplazar los datos.
@@ -59,7 +59,7 @@ Las nuevas versiones quedan listas cuando el service worker termina de instalars
 
 ## Comprobación manual recomendada
 
-1. Configura la Cajita; crea depósitos y gastos con decimales, distintas fechas y categorías.
+1. Configura la Cajita; crea depósitos y gastos con decimales y categorías. Comprueba que se registran con la fecha de hoy.
 2. Edita y elimina; recarga y comprueba que persisten.
 3. Navega entre periodos; comprueba totales y estadísticas.
 4. Exporta, modifica un gasto y restaura el respaldo; verifica los totales. Prueba un JSON inválido: debe conservar los datos actuales.
@@ -75,3 +75,4 @@ Las pruebas automatizadas cubren importes, límites de periodos, fechas bisiesta
 Efectivo lleva el saldo de la billetera sin rendimientos. Configura cuánto tienes hoy; las entradas y los ajustes se registran desde el botón central `$`. Un gasto permite elegir Cajita o Efectivo. Los gastos sin cuenta en respaldos anteriores pertenecen a Cajita. Gastos y resumen muestra ambos en un único historial con estadísticas.
 
 El menú usa `−$` para Gasto, `+$` para Depósito o Entrada de efectivo y `≈$` para ajustar saldo. Retiro ya no aparece como acción nueva; los registros antiguos se conservan. Añadir efectivo no transfiere dinero desde la Cajita automáticamente: los saldos se llevan por separado. Para reflejar una retirada real de Nu, añade el efectivo y ajusta la Cajita a su saldo real, sin registrar esa transferencia como gasto.
+
