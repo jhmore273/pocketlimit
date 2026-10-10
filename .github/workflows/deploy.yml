@@ -1,4 +1,4 @@
-name: Publicar PocketLimit
+name: Publicar LOOTVAULT
 on:
   push:
     branches: [main]
@@ -36,3 +36,4 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+

@@ -17,7 +17,7 @@ export function validDate(value: unknown): value is string { if (typeof value !=
 export function parseBackup(raw: string): Data {
   const d = JSON.parse(raw);
   const s = d?.settings;
-  if (d?.version !== 1 || !s || !Number.isSafeInteger(s.budget) || s.budget <= 0 || s.budget > 100000000000 || !['week','month'].includes(s.cadence) || !Array.isArray(s.categories) || !s.categories.length || s.categories.length > 50 || s.categories.some((c: unknown)=> typeof c !== 'string' || !c.trim() || c.length > 40) || new Set(s.categories).size !== s.categories.length || !Array.isArray(d.expenses) || d.expenses.length > 100000) throw new Error('Este archivo no es un respaldo válido de PocketLimit.');
+  if (d?.version !== 1 || !s || !Number.isSafeInteger(s.budget) || s.budget <= 0 || s.budget > 100000000000 || !['week','month'].includes(s.cadence) || !Array.isArray(s.categories) || !s.categories.length || s.categories.length > 50 || s.categories.some((c: unknown)=> typeof c !== 'string' || !c.trim() || c.length > 40) || new Set(s.categories).size !== s.categories.length || !Array.isArray(d.expenses) || d.expenses.length > 100000) throw new Error('Este archivo no es un respaldo válido de LOOTVAULT.');
   const ids = new Set();
   for (const e of d.expenses) { if (!e || typeof e.id !== 'string' || !e.id || ids.has(e.id) || !Number.isSafeInteger(e.amount) || e.amount <= 0 || e.amount > 100000000000 || !validDate(e.date) || !s.categories.includes(e.category) || (e.source!==undefined && !['cash','vault','black'].includes(e.source)) || typeof e.note !== 'string' || e.note.length > 200) throw new Error('El respaldo contiene gastos inválidos.'); ids.add(e.id); }
   const cash = d.cash === undefined ? undefined : validateVault(d.cash);
@@ -25,5 +25,6 @@ export function parseBackup(raw: string): Data {
   const vault = d.vault === undefined ? undefined : validateVault(d.vault);
   return { ...(cash ? {cash} : {}), ...(vault ? {vault} : {}), version: 1, settings: { budget: s.budget, cadence: s.cadence, categories: [...s.categories] }, expenses: d.expenses.map((e: Expense)=>({id:e.id,amount:e.amount,date:e.date,category:e.category,note:e.note,...(e.source?{source:e.source}:{})})) };
 }
+
 
 

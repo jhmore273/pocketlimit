@@ -1,4 +1,4 @@
-# PocketLimit
+# LOOTVAULT
 
 ## Mi Cajita (vista previa local)
 
@@ -34,14 +34,14 @@ Abre http://localhost:4173, espera unos segundos y recarga. El service worker so
 1. Crea un repositorio público en GitHub, por ejemplo `pocketlimit`.
 2. Sube **el contenido de esta carpeta a la raíz del repositorio**, incluida `.github/workflows/deploy.yml`, `package-lock.json` y `scripts/`. No subas `node_modules` ni `dist`.
 3. Usa la rama `main`. En Settings → Pages → Build and deployment → Source, elige **GitHub Actions**.
-4. En Actions, espera a que termine “Publicar PocketLimit”. Si hace falta, usa Run workflow.
+4. En Actions, espera a que termine “Publicar LOOTVAULT”. Si hace falta, usa Run workflow.
 5. Abre la dirección indicada en Pages: `https://TU_USUARIO.github.io/pocketlimit/`.
 
 Las rutas relativas funcionan tanto en un subdirectorio como en un dominio propio. El flujo compila y ejecuta las pruebas antes de publicar. Documentación: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
 
 ## Instalar en iPhone
 
-Abre la dirección HTTPS en Safari. Toca Compartir → Añadir a pantalla de inicio; activa Abrir como app web si aparece y toca Añadir. Abre PocketLimit desde su icono con internet una primera vez; ve a Ajustes y espera “Modo sin conexión listo”. Después cierra la app, activa modo avión y vuelve a abrirla para comprobar el funcionamiento. Guía de Apple: https://support.apple.com/en-lamr/guide/iphone/iphea86e5236/ios
+Abre la dirección HTTPS en Safari. Toca Compartir → Añadir a pantalla de inicio; activa Abrir como app web si aparece y toca Añadir. Abre LOOTVAULT desde su icono con internet una primera vez; ve a Ajustes y espera “Modo sin conexión listo”. Después cierra la app, activa modo avión y vuelve a abrirla para comprobar el funcionamiento. Guía de Apple: https://support.apple.com/en-lamr/guide/iphone/iphea86e5236/ios
 
 ## Cómo funciona
 
@@ -55,7 +55,7 @@ Abre la dirección HTTPS en Safari. Toca Compartir → Añadir a pantalla de ini
 
 Tus datos viven en IndexedDB de este navegador y dirección web. La app no envía gastos a ningún servidor y no carga fuentes externas. GitHub recibe las solicitudes normales para descargar la app. Los respaldos JSON no están cifrados. Safari y la app instalada pueden tener almacenamiento separado: importa un respaldo si lo necesitas. Borrar datos del navegador, cambiar de dirección o perder el dispositivo puede borrar el historial; conserva respaldos. Esta primera versión está pensada para usar una sola ventana a la vez: dos ventanas editando simultáneamente pueden sobrescribir cambios. No sincroniza entre dispositivos ni se conecta a bancos.
 
-Las nuevas versiones quedan listas cuando el service worker termina de instalarse. Cierra todas las ventanas de PocketLimit y vuelve a abrir para activar una actualización. No borres los datos de Safari para actualizar.
+Las nuevas versiones quedan listas cuando el service worker termina de instalarse. Cierra todas las ventanas de LOOTVAULT y vuelve a abrir para activar una actualización. No borres los datos de Safari para actualizar.
 
 ## Comprobación manual recomendada
 
