@@ -192,3 +192,7 @@ header{border-bottom:0}
 /* Uniform sharp-corner pixel interface across every panel and control. */
 *{border-radius:0!important}
 
+/* A shared offset shadow gives interactive controls a raised, pixel-button feel. */
+.shell button:not(.expense){filter:drop-shadow(0 4px 0 rgba(0,0,0,.52))}
+.shell button:not(.expense):active:not(:disabled){filter:drop-shadow(0 1px 0 rgba(0,0,0,.58))}
+
